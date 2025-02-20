@@ -1,0 +1,2 @@
+# bold-breeze
+Django application
