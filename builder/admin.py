@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+admin.site.register(Era)
+admin.site.register(UnitRole)
+admin.site.register(UnitType)
+admin.site.register(RulesLevel)
+admin.site.register(Unit)
+
