@@ -1,16 +1,29 @@
 from django.db import models
+from django.contrib import admin
 
 class RulesLevel(models.Model):
     level = models.CharField(max_length=50, unique=True)
 
+    def __str__(self):
+        return self.level
+
 class UnitType(models.Model):
     type = models.CharField(max_length=20, unique=True)
+
+    def __str__(self):
+        return self.type
 
 class UnitRole(models.Model):
     role = models.CharField(max_length=20, unique=True)
 
+    def __str__(self):
+        return self.role
+
 class Era(models.Model):
     era = models.CharField(max_length=20, unique=True)
+
+    def __str__(self):
+        return self.era
 
 class Unit(models.Model):
     name = models.CharField(max_length=60, unique=False)
@@ -25,3 +38,7 @@ class Unit(models.Model):
     notes =  models.CharField(max_length=200)
     point_value = models.PositiveSmallIntegerField(default=0)
     master_unit_list_number = models.PositiveSmallIntegerField(default=0, unique=True)
+
+    def __str__(self):
+        return "{0}".format(self.name)
+
