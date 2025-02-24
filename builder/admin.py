@@ -25,3 +25,8 @@ class UnitTypeAdmin(admin.ModelAdmin):
 class RulesLevelAdmin(admin.ModelAdmin):
     list_display = ('level',)
     ordering = ('level',)
+
+@admin.register(Technology)
+class TechnologyAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    ordering = ('name',)

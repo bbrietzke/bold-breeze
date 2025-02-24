@@ -24,6 +24,12 @@ class Era(models.Model):
 
     def __str__(self):
         return self.era
+    
+class Technology(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
 
 class Unit(models.Model):
     name = models.CharField(max_length=60, unique=False)
@@ -35,9 +41,10 @@ class Unit(models.Model):
     unit_role = models.ForeignKey(UnitRole, on_delete=models.PROTECT)
     date_introduced = models.PositiveBigIntegerField(default=0)
     era = models.ForeignKey(Era, on_delete=models.PROTECT, null=True)
-    notes =  models.CharField(max_length=200)
+    notes =  models.TextField(max_length=500)
     point_value = models.PositiveSmallIntegerField(default=0)
     master_unit_list_number = models.PositiveSmallIntegerField(default=0, unique=True)
+    technology = models.ForeignKey(Technology, on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return "{0}".format(self.name)
