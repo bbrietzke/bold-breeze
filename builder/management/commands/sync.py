@@ -4,7 +4,6 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import re
 
-
 class Command(BaseCommand):
     help = "Syncs between master unit list and the local database"
 

@@ -1,38 +1,51 @@
 from django.db import models
-from django.contrib import admin
 
 class RulesLevel(models.Model):
-    level = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=128, unique=True)
 
     def __str__(self):
-        return self.level
+        return self.name
 
 class UnitType(models.Model):
-    type = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=128, unique=True)
 
     def __str__(self):
-        return self.type
+        return self.name
 
 class UnitRole(models.Model):
-    role = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=128, unique=True)
 
     def __str__(self):
-        return self.role
+        return self.name
 
 class Era(models.Model):
-    era = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=128, unique=True)
+    master_unit_list_id = models.PositiveSmallIntegerField(default=0, unique=True)
+    slug = models.CharField(max_length=64, unique=True)
+    start = models.PositiveSmallIntegerField(default=0, unique=True)
+    end = models.PositiveSmallIntegerField(default=0, unique=True)
 
     def __str__(self):
-        return self.era
+        return "{0} from {1} to {2} ( {3} )".format(self.name, self.start, self.end, self.slug)
+    
+class Faction(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    master_unit_list_id = models.PositiveSmallIntegerField(default=0, unique=True)
+    slug = models.CharField(max_length=64, unique=True)
+
+    def __str__(self):
+        return self.name
+
     
 class Technology(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=128, unique=True)
 
     def __str__(self):
         return self.name
 
 class Unit(models.Model):
-    name = models.CharField(max_length=60, unique=False)
+    name = models.CharField(max_length=128, unique=False)
+    slug = models.CharField(max_length=64, unique=True)
     tonnage = models.PositiveSmallIntegerField(default=0)
     battle_value = models.PositiveSmallIntegerField(default=0)
     cost = models.PositiveBigIntegerField(default=0)
