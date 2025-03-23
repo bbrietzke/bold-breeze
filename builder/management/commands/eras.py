@@ -1,17 +1,14 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
+from builder.utils import beautify_the_soup
 from builder.models import *
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
 import re
 
 class Command(BaseCommand): 
     help = "Blah, blah, blah"
 
     def handle(self, *args, **options):
-        page = urlopen("http://masterunitlist.info/Era/Index").read().decode("utf-8")
-        soup = BeautifulSoup(page, 'html.parser')
-
-        all_eras = soup.find_all('div', {"class": "col-xs-4 pad-after"})
+        all_eras = beautify_the_soup("http://masterunitlist.info/Era/Index") \
+            .find_all('div', {"class": "col-xs-4 pad-after"})
 
         for era in all_eras:
             name = era.select_one('h3').string.strip()
